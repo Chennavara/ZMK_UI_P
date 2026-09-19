@@ -1,0 +1,5 @@
+@EndUserText.label: 'Serifice definition'
+define service ZMK_ui_PRODUCT {
+  expose ZMK_c_HEAD_01 as HEAD;
+  expose ZMK_C_ITEM_01 as ITEM;
+}

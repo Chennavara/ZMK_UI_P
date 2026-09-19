@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Item',
+    typeNamePlural: 'Items',
+    title: { type: #STANDARD, value: 'Material' },
+    description: { type: #STANDARD, value: 'Matdes' }
+  }
+}
+annotate view ZMK_C_ITEM_01 with
+{
+  @UI.facet: [
+    {
+      id: 'ItemDetails',
+      type: #COLLECTION,
+      label: 'Item Details',
+      position: 10
+    },
+    {
+      id: 'ItemBasicGroup',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Information',
+      parentId: 'ItemDetails',
+      targetQualifier: 'ItemBasicData',
+      position: 10
+    }
+  ]
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 10 }]
+  HeadId;
+
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 20 }]
+  ItemId;
+
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 30 }]
+  @Search.defaultSearchElement: true
+  Material;
+
+  @UI.lineItem: [{ position: 40, importance: #MEDIUM }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 40 }]
+  @Search.defaultSearchElement: true
+  Matdes;
+
+  @UI.lineItem: [{ position: 50, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 50 }]
+  Qty;
+
+  @UI.lineItem: [{ position: 60, importance: #MEDIUM }]
+  @UI.fieldGroup: [{ qualifier: 'ItemBasicData', position: 60 }]
+  Batch;
+}

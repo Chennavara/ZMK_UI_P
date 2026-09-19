@@ -1,0 +1,102 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Header',
+    typeNamePlural: 'Headers',
+    title: { type: #STANDARD, value: 'Name' },
+    description: { type: #STANDARD, value: 'Description' }
+  },
+  presentationVariant: [{
+    sortOrder: [{ by: 'HeadId', direction: #DESC }],
+    visualizations: [{ type: #AS_LINEITEM }]
+  }]
+}
+annotate view ZMK_c_HEAD_01 with
+{
+  @UI.facet: [
+    /* Header Facet - Status Tag */
+    {
+      id: 'HeaderStatus',
+      purpose: #HEADER,
+      type: #DATAPOINT_REFERENCE,
+      targetQualifier: 'StatusDataPoint',
+      position: 10
+    },
+    /* Main Section Facet */
+    {
+      id: 'GeneralInformation',
+      type: #COLLECTION,
+      label: 'General Information',
+      position: 10
+    },
+    {
+      id: 'BasicData',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Details',
+      parentId: 'GeneralInformation',
+      targetQualifier: 'BasicDataGroup',
+      position: 10
+    },
+    {
+      id: 'AdminData',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Administrative Data',
+      parentId: 'GeneralInformation',
+      targetQualifier: 'AdminGroup',
+      position: 20
+    },
+    /* Child Line Items Section */
+    {
+      id: 'LineItems',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Items',
+      targetElement: '_item',
+      position: 20
+    }
+  ]
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'BasicDataGroup', position: 10 }]
+  @UI.selectionField: [{ position: 10 }]
+  HeadId;
+
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'BasicDataGroup', position: 20 }]
+  @UI.selectionField: [{ position: 20 }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  Name;
+
+  @UI.lineItem: [{ position: 30, importance: #MEDIUM }]
+  @UI.fieldGroup: [{ qualifier: 'BasicDataGroup', position: 30 }]
+  @Search.defaultSearchElement: true
+  Description;
+
+  @UI.lineItem: [{ position: 40, importance: #HIGH }]
+  @UI.fieldGroup: [{ qualifier: 'BasicDataGroup', position: 40 }]
+  Price;
+
+  @UI.lineItem: [{ position: 50, importance: #HIGH }]
+  @UI.dataPoint: { qualifier: 'StatusDataPoint', title: 'Status' }
+  @UI.fieldGroup: [{ qualifier: 'BasicDataGroup', position: 50 }]
+  @UI.selectionField: [{ position: 30 }]
+  StatusCode;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminGroup', position: 10 }]
+  LocalCreatedBy;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminGroup', position: 20 }]
+  LocalCreatedAt;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminGroup', position: 30 }]
+  LocalLastChangedBy;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminGroup', position: 40 }]
+  LocalLastChangedAt;
+
+  @UI.fieldGroup: [{ qualifier: 'AdminGroup', position: 50 }]
+  LastChangedAt;
+}
